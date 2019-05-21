@@ -69,3 +69,11 @@ How to decide which command to call? Pull out first word of command and select? 
 Update go to 1.12.5 using `snap install go --classic`.
 
 Try again with packages.
+
+Now that I've finished coding, redraw architectural diagram.
+
+```graphviz
+digraph {
+    app -> { state command }
+}
+```

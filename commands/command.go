@@ -12,6 +12,10 @@ type Command interface {
 	Execute(model *state.State)
 }
 
+// All the available commands
+var All []Command
+
 func init() {
 	log.SetFlags(0)
+	All = []Command{&Move{}, &Turn{}, &Report{}, &Place{}}
 }

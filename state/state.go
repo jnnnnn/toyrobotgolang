@@ -11,3 +11,7 @@ type Robot struct {
 	PositionY int
 	Current   Facing
 }
+
+func Initial() *State {
+	return &State{Table: Table{SizeX: 5, SizeY: 5}}
+}
