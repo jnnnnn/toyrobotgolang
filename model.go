@@ -7,7 +7,7 @@ type Model struct {
 }
 
 // Move the r across the t.
-func Move(r Robot, t Table) {
+func Move(r *Robot, t Table) {
 	x := r.PositionX
 	y := r.PositionY
 	switch r.Current {

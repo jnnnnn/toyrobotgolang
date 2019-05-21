@@ -1,5 +1,7 @@
 package main
 
+import "errors"
+
 // Facing is a Facing point
 type Facing int
 
@@ -11,6 +13,35 @@ const (
 	West
 	FacingCount
 )
+
+func UnParseFacing(f Facing) string {
+	switch f {
+	case North:
+		return "NORTH"
+	case East:
+		return "EAST"
+	case South:
+		return "SOUTH"
+	case West:
+		return "WEST"
+	}
+	return ""
+}
+
+// ParseFacing is a function
+func ParseFacing(s string) (Facing, error) {
+	switch s {
+	case "NORTH":
+		return North, nil
+	case "EAST":
+		return East, nil
+	case "SOUTH":
+		return South, nil
+	case "WEST":
+		return West, nil
+	}
+	return -1, errors.New("Unparseable facing direction")
+}
 
 // Turning left or right
 type Turning int
