@@ -28,34 +28,34 @@ func TestMoveParseBad(t *testing.T) {
 }
 
 func TestMoveInitialize(t *testing.T) {
-	state := testInitialState()
+	model := testInitialState()
 	c := Move{}
 
-	c.Execute(state)
+	c.Execute(model)
 
-	if state.Robot != nil {
+	if model.Robot != nil {
 		t.Errorf("Robot was not initialized but still moved")
 	}
 }
 
 func TestMoveValid(t *testing.T) {
-	state := testState()
+	model := testState()
 	c := Move{}
 
-	c.Execute(state)
+	c.Execute(model)
 
-	r := state.Robot
+	r := model.Robot
 	if r.PositionY != 3 && r.PositionX != 2 {
 		t.Errorf("Move to 3,2 didn't work; got %d %d", r.PositionX, r.PositionY)
 	}
 }
 func TestMoveInvalid(t *testing.T) {
-	state := &state.State{Table: state.Table{5, 5}, Robot: &state.Robot{2, 4, state.North}}
+	model := &state.State{Table: state.Table{5, 5}, Robot: &state.Robot{2, 4, state.North}}
 	c := Move{}
 
-	c.Execute(state)
+	c.Execute(model)
 
-	r := state.Robot
+	r := model.Robot
 	if r.PositionY != 4 && r.PositionX != 2 {
 		t.Errorf("Robot moved off table to %d %d", r.PositionX, r.PositionY)
 	}
