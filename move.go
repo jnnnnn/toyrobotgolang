@@ -1,13 +1,13 @@
 package main
 
-type CommandMove struct {
+type Move struct {
 }
 
-func (c CommandMove) Parse(line string) bool {
+func (c Move) Parse(line string) bool {
 	return line == "MOVE"
 }
 
-func (c CommandMove) Execute(state State) {
+func (c Move) Execute(state State) {
 	r := state.Robot
 	if r == nil {
 		return

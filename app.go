@@ -10,7 +10,7 @@ import (
 func main() {
 	state := State{Table: Table{SizeX: 5, SizeY: 5}}
 
-	var commands = []Command{&CommandMove{}}
+	var commands = []Command{&Move{}}
 
 	scanner := bufio.NewScanner(os.Stdin)
 	for scanner.Scan() {

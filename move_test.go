@@ -1,6 +1,8 @@
 package main
 
-import "testing"
+import (
+	"testing"
+)
 
 func testState() State {
 	return State{Table: Table{5, 5}, Robot: &Robot{2, 2, North}}
@@ -11,13 +13,13 @@ func testInitialState() State {
 }
 
 func TestMoveParseGood(t *testing.T) {
-	c := CommandMove{}
+	c := Move{}
 	if c.Parse("MOVE") != true {
 		t.Errorf("Should have parsed MOVE.")
 	}
 }
 func TestMoveParseBad(t *testing.T) {
-	c := CommandMove{}
+	c := Move{}
 	if c.Parse("MOVER") != true {
 		t.Errorf("Shouldn't have parsed MOVER.")
 	}
@@ -25,7 +27,7 @@ func TestMoveParseBad(t *testing.T) {
 
 func TestMoveInitialize(t *testing.T) {
 	state := testInitialState()
-	c := CommandMove{}
+	c := Move{}
 
 	c.Execute(state)
 
@@ -36,7 +38,7 @@ func TestMoveInitialize(t *testing.T) {
 
 func TestMoveValid(t *testing.T) {
 	state := testState()
-	c := CommandMove{}
+	c := Move{}
 
 	c.Execute(state)
 
@@ -47,7 +49,7 @@ func TestMoveValid(t *testing.T) {
 }
 func TestMoveInvalid(t *testing.T) {
 	state := State{Table: Table{5, 5}, Robot: &Robot{2, 4, North}}
-	c := CommandMove{}
+	c := Move{}
 
 	c.Execute(state)
 
