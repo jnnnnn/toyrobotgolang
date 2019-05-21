@@ -2,6 +2,11 @@ package main
 
 import "errors"
 
+type State struct {
+	*Robot
+	Table
+}
+
 // Table represents a table that the robot can drive on
 type Table struct {
 	SizeX, SizeY int
@@ -13,26 +18,6 @@ func (t Table) ValidPosition(x, y int) bool {
 		return false
 	}
 	return true
-}
-
-// Move the robot r across the table.
-func Move(r *Robot, table Table) {
-	x := r.PositionX
-	y := r.PositionY
-	switch r.Current {
-	case North:
-		y++
-	case South:
-		y--
-	case East:
-		x++
-	case West:
-		x--
-	}
-	if table.ValidPosition(x, y) {
-		r.PositionX = x
-		r.PositionY = y
-	}
 }
 
 // Place a robot on a table.

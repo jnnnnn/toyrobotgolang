@@ -8,11 +8,17 @@ import (
 )
 
 func main() {
-	var robot *Robot
-	table := Table{SizeX: 5, SizeY: 5}
+	state := State{Table: Table{SizeX: 5, SizeY: 5}}
+
+	var commands = []Command{&CommandMove{}}
+
 	scanner := bufio.NewScanner(os.Stdin)
 	for scanner.Scan() {
-		Handle(scanner.Text(), &robot, table)
+		for _, command := range commands {
+			if command.Parse(scanner.Text()) {
+				command.Execute(state)
+			}
+		}
 	}
 }
 

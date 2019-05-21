@@ -30,3 +30,39 @@ digraph {
     { model } -> { robot table }
 }
 ```
+
+## Third design: fewest abstractions
+
+```graphviz
+digraph {
+    main -> {Scan Handle}
+    Handle -> {Robot Table Sscanf Facing ParseFacing Place Turn Move Printf}
+    ParseFacing -> Facing
+    { Move Place } -> { Robot Table ValidPosition }
+    ValidPosition -> Table
+    Turn -> { Robot Facing }
+    main -> { Robot Table }
+    Robot -> Facing
+}
+```
+
+Integration tests would be easy with this design, just feed input lines to Handle and then check state.
+
+## Fourth design: command pattern
+
+```graphviz
+digraph {
+    main -> { Scan ProcessLine }
+    ProcessLine -> { Parse Command State } 
+    State -> { Robot Table }
+    Parse -> Command
+    Command -> { Robot Table Sscanf Facing ParseFacing Place Turn Move Printf }
+    ParseFacing -> Facing
+    { Move Place } -> { Robot Table ValidPosition }
+    Turn -> { Robot Facing }
+    main -> { Robot Table }
+}
+```
+
+How to decide which command to call? Pull out first word of command and select? Give line to each command until one can parse it? Yeah, that's better (but possibly less performant).
+
