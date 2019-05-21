@@ -1,3 +1,4 @@
+package state
 
 // Facing is a compass point
 type Facing int

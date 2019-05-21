@@ -1,3 +1,4 @@
+package state
 
 // Table represents a table that the robot can drive on
 type Table struct {
