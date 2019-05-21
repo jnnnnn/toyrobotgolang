@@ -3,13 +3,13 @@ package commands
 import (
 	"log"
 
-	"github.com/jnnnnn/toyrobotgolang/state"
+	"github.com/jnnnnn/toyrobotgolang/model"
 )
 
 // Command doesn't really belong here but it's only 3 lines of code
 type Command interface {
 	Parse(line string) bool
-	Execute(model *state.State)
+	Execute(state *model.Model)
 }
 
 // All the available commands

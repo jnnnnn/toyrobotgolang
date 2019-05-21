@@ -3,7 +3,7 @@ package commands
 import (
 	"testing"
 
-	"github.com/jnnnnn/toyrobotgolang/state"
+	"github.com/jnnnnn/toyrobotgolang/model"
 )
 
 func TestTurnParseGood(t *testing.T) {
@@ -20,23 +20,23 @@ func TestTurnParseBad(t *testing.T) {
 }
 
 func TestTurnInitialize(t *testing.T) {
-	model := testInitialState()
-	c := Turn{state.Left}
+	state := testInitialModel()
+	c := Turn{model.Left}
 
-	c.Execute(model)
+	c.Execute(state)
 
-	if model.Robot != nil {
+	if state.Robot != nil {
 		t.Errorf("Robot was not initialized but still Turnd")
 	}
 }
 
 func TestTurnValid(t *testing.T) {
-	model := testState()
-	c := Turn{state.Left}
+	state := testModel()
+	c := Turn{model.Left}
 
-	c.Execute(model)
+	c.Execute(state)
 
-	if model.Robot.Current != state.West {
+	if state.Robot.Current != model.West {
 		t.Errorf("Turn left from north is west")
 	}
 }

@@ -20,27 +20,27 @@ func TestReportParseBad(t *testing.T) {
 }
 
 func TestReportInitialize(t *testing.T) {
-	model := testInitialState()
+	state := testInitialModel()
 	c := Report{}
 
 	var str bytes.Buffer
 	log.SetOutput(&str)
 
-	c.Execute(model)
+	c.Execute(state)
 
 	if str.String() != "" {
-		t.Errorf("Reported while in an invalid state")
+		t.Errorf("Reported while in an invalid model")
 	}
 }
 
 func TestReportValid(t *testing.T) {
-	model := testState()
+	state := testModel()
 	c := Report{}
 
 	var str bytes.Buffer
 	log.SetOutput(&str)
 
-	c.Execute(model)
+	c.Execute(state)
 
 	if str.String() != "Robot at 2 2 NORTH\n" {
 		t.Errorf("Wrong position reported %s", str.String())

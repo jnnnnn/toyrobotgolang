@@ -6,17 +6,17 @@ import (
 
 	"github.com/jnnnnn/toyrobotgolang/commands"
 
-	"github.com/jnnnnn/toyrobotgolang/state"
+	"github.com/jnnnnn/toyrobotgolang/model"
 )
 
 func main() {
-	model := state.Initial()
+	state := model.Initial()
 
 	scanner := bufio.NewScanner(os.Stdin)
 	for scanner.Scan() {
 		for _, command := range commands.All {
 			if command.Parse(scanner.Text()) {
-				command.Execute(model)
+				command.Execute(state)
 			}
 		}
 	}

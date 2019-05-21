@@ -3,15 +3,15 @@ package commands
 import (
 	"testing"
 
-	"github.com/jnnnnn/toyrobotgolang/state"
+	"github.com/jnnnnn/toyrobotgolang/model"
 )
 
-func testState() *state.State {
-	return &state.State{Table: state.Table{5, 5}, Robot: &state.Robot{2, 2, state.North}}
+func testModel() *model.Model {
+	return &model.Model{Table: model.Table{5, 5}, Robot: &model.Robot{2, 2, model.North}}
 }
 
-func testInitialState() *state.State {
-	return &state.State{Table: state.Table{5, 5}, Robot: nil}
+func testInitialModel() *model.Model {
+	return &model.Model{Table: model.Table{5, 5}, Robot: nil}
 }
 
 func TestMoveParseGood(t *testing.T) {
@@ -28,34 +28,34 @@ func TestMoveParseBad(t *testing.T) {
 }
 
 func TestMoveInitialize(t *testing.T) {
-	model := testInitialState()
+	state := testInitialModel()
 	c := Move{}
 
-	c.Execute(model)
+	c.Execute(state)
 
-	if model.Robot != nil {
+	if state.Robot != nil {
 		t.Errorf("Robot was not initialized but still moved")
 	}
 }
 
 func TestMoveValid(t *testing.T) {
-	model := testState()
+	state := testModel()
 	c := Move{}
 
-	c.Execute(model)
+	c.Execute(state)
 
-	r := model.Robot
+	r := state.Robot
 	if r.PositionY != 3 && r.PositionX != 2 {
 		t.Errorf("Move to 3,2 didn't work; got %d %d", r.PositionX, r.PositionY)
 	}
 }
 func TestMoveInvalid(t *testing.T) {
-	model := &state.State{Table: state.Table{5, 5}, Robot: &state.Robot{2, 4, state.North}}
+	state := &model.Model{Table: model.Table{5, 5}, Robot: &model.Robot{2, 4, model.North}}
 	c := Move{}
 
-	c.Execute(model)
+	c.Execute(state)
 
-	r := model.Robot
+	r := state.Robot
 	if r.PositionY != 4 && r.PositionX != 2 {
 		t.Errorf("Robot moved off table to %d %d", r.PositionX, r.PositionY)
 	}

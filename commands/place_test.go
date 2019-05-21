@@ -3,7 +3,7 @@ package commands
 import (
 	"testing"
 
-	"github.com/jnnnnn/toyrobotgolang/state"
+	"github.com/jnnnnn/toyrobotgolang/model"
 )
 
 func TestPlaceParseGood(t *testing.T) {
@@ -20,27 +20,27 @@ func TestPlaceParseBad(t *testing.T) {
 }
 
 func TestPlaceValid(t *testing.T) {
-	model := testInitialState()
-	c := Place{2, 3, state.West}
+	state := testInitialModel()
+	c := Place{2, 3, model.West}
 
-	c.Execute(model)
+	c.Execute(state)
 
-	if model.Robot == nil {
+	if state.Robot == nil {
 		t.Errorf("Robot was not placed")
 	}
-	r := model.Robot
-	if r.PositionX != 2 || r.PositionY != 3 || r.Current != state.West {
+	r := state.Robot
+	if r.PositionX != 2 || r.PositionY != 3 || r.Current != model.West {
 		t.Errorf("Robot was placed incorrectly.")
 	}
 }
 
 func TestPlaceInvalid(t *testing.T) {
-	model := &state.State{Table: state.Table{5, 5}, Robot: &state.Robot{2, 4, state.North}}
-	c := Place{2, 6, state.West}
+	state := &model.Model{Table: model.Table{5, 5}, Robot: &model.Robot{2, 4, model.North}}
+	c := Place{2, 6, model.West}
 
-	c.Execute(model)
+	c.Execute(state)
 
-	r := model.Robot
+	r := state.Robot
 	if r.PositionY != 4 && r.PositionX != 2 {
 		t.Errorf("Robot Placed off table to %d %d", r.PositionX, r.PositionY)
 	}

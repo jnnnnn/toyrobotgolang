@@ -1,6 +1,6 @@
 package commands
 
-import "github.com/jnnnnn/toyrobotgolang/state"
+import "github.com/jnnnnn/toyrobotgolang/model"
 
 type Move struct {
 }
@@ -9,24 +9,24 @@ func (c Move) Parse(line string) bool {
 	return line == "MOVE"
 }
 
-func (c Move) Execute(model *state.State) {
-	r := model.Robot
+func (c Move) Execute(state *model.Model) {
+	r := state.Robot
 	if r == nil {
 		return
 	}
 	x := r.PositionX
 	y := r.PositionY
 	switch r.Current {
-	case state.North:
+	case model.North:
 		y++
-	case state.South:
+	case model.South:
 		y--
-	case state.East:
+	case model.East:
 		x++
-	case state.West:
+	case model.West:
 		x--
 	}
-	if model.Table.ValidPosition(x, y) {
+	if state.Table.ValidPosition(x, y) {
 		r.PositionX = x
 		r.PositionY = y
 	}

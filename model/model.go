@@ -1,6 +1,6 @@
-package state
+package model
 
-type State struct {
+type Model struct {
 	*Robot
 	Table
 }
@@ -12,6 +12,6 @@ type Robot struct {
 	Current   Facing
 }
 
-func Initial() *State {
-	return &State{Table: Table{SizeX: 5, SizeY: 5}}
+func Initial() *Model {
+	return &Model{Table: Table{SizeX: 5, SizeY: 5}}
 }

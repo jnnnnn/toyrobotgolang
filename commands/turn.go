@@ -1,36 +1,36 @@
 package commands
 
-import "github.com/jnnnnn/toyrobotgolang/state"
+import "github.com/jnnnnn/toyrobotgolang/model"
 
 type Turn struct {
-	state.Turning
+	model.Turning
 }
 
 func (c *Turn) Parse(line string) bool {
 	switch line {
 	case "LEFT":
-		c.Turning = state.Left
+		c.Turning = model.Left
 		return true
 	case "RIGHT":
-		c.Turning = state.Right
+		c.Turning = model.Right
 		return true
 	default:
 		return false
 	}
 }
 
-func (c Turn) Execute(model *state.State) {
-	r := model.Robot
+func (c Turn) Execute(state *model.Model) {
+	r := state.Robot
 	if r == nil {
 		return
 	}
-	if c.Turning == state.Left {
+	if c.Turning == model.Left {
 		r.Current--
 	} else {
 		r.Current++
 	}
-	r.Current %= state.FacingCount
+	r.Current %= model.FacingCount
 	if r.Current < 0 {
-		r.Current += state.FacingCount
+		r.Current += model.FacingCount
 	}
 }

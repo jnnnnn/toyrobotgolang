@@ -2,7 +2,7 @@
 
 ## First design
 
-app sends input to parser which gives back commands; app then executes those commands on its own state
+app sends input to parser which gives back commands; app then executes those commands on its own model
 
 ```graphviz
 digraph {
@@ -16,18 +16,18 @@ digraph {
 
 ## Second design
  
-app sends input to parser which gives back commands. app has state stored in model. App passes model and commands to handler which executes the command on the model, updating the model's state.
+app sends input to parser which gives back commands. app has model stored in state. App passes state and commands to handler which executes the command on the state, updating the state's model.
 
 ```graphviz
 digraph {
     { move place } -> { robot table }
     { turn report } -> { robot }
-    { app } -> { model parser command handler }
+    { app } -> { state parser command handler }
     { parser } -> { command }
     { handler } -> { move place turn report }
     handler -> command
-    handler -> model
-    { model } -> { robot table }
+    handler -> state
+    { state } -> { robot table }
 }
 ```
 
@@ -46,15 +46,15 @@ digraph {
 }
 ```
 
-Integration tests would be easy with this design, just feed input lines to Handle and then check state.
+Integration tests would be easy with this design, just feed input lines to Handle and then check model.
 
 ## Fourth design: command pattern
 
 ```graphviz
 digraph {
     main -> { Scan ProcessLine }
-    ProcessLine -> { Parse Command State } 
-    State -> { Robot Table }
+    ProcessLine -> { Parse Command Model } 
+    Model -> { Robot Table }
     Parse -> Command
     Command -> { Robot Table Sscanf Facing ParseFacing Place Turn Move Printf }
     ParseFacing -> Facing
@@ -74,6 +74,11 @@ Now that I've finished coding, redraw architectural diagram.
 
 ```graphviz
 digraph {
-    app -> { state command }
+    app -> { model commands Parse Execute }
+    model -> { robot table }
+    robot -> { facing }
+    validposition -> { table }
+    commands -> { move place report turn }
+
 }
 ```
