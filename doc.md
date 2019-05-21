@@ -74,11 +74,18 @@ Now that I've finished coding, redraw architectural diagram.
 
 ```graphviz
 digraph {
-    app -> { model commands Parse Execute }
-    model -> { robot table }
-    robot -> { facing }
-    validposition -> { table }
-    commands -> { move place report turn }
-
+    app -> { model commands command_Parse command_Execute }
+    model -> { model_robot model_table }
+    model_robot -> { model_facing }
+    ValidPosition -> { model_table }
+    commands -> { command_move command_place command_report command_turn }
+    {command_move command_place } -> { command_Parse command_Execute ValidPosition model_robot model_table model_facing }
+    command_report -> { model_robot command_Parse command_Execute }
+    command_turn -> { model_robot model_facing command_Parse command_Execute }
+    
 }
 ```
+
+250 lines of code, 250 lines of tests.
+
+Diagram looks pretty overcomplicated :( I can't see a way of simplifying the diagram (by changing the code architecture).
