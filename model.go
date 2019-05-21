@@ -2,6 +2,12 @@ package main
 
 import "errors"
 
+// Command doesn't really belong here but it's only 3 lines of code
+type Command interface {
+	Parse(line string) bool
+	Execute(state State)
+}
+
 type State struct {
 	*Robot
 	Table

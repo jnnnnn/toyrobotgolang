@@ -1,10 +1,5 @@
 package main
 
-type Command interface {
-	Parse(line string) bool
-	Execute(state State)
-}
-
 type CommandMove struct {
 }
 
