@@ -6,12 +6,12 @@ import (
 	"github.com/jnnnnn/toyrobotgolang/state"
 )
 
-func testState() state.State {
-	return state.State{Table: state.Table{5, 5}, Robot: &state.Robot{2, 2, state.North}}
+func testState() *state.State {
+	return &state.State{Table: state.Table{5, 5}, Robot: &state.Robot{2, 2, state.North}}
 }
 
-func testInitialState() state.State {
-	return state.State{Table: state.Table{5, 5}, Robot: nil}
+func testInitialState() *state.State {
+	return &state.State{Table: state.Table{5, 5}, Robot: nil}
 }
 
 func TestMoveParseGood(t *testing.T) {
@@ -50,7 +50,7 @@ func TestMoveValid(t *testing.T) {
 	}
 }
 func TestMoveInvalid(t *testing.T) {
-	state := state.State{Table: state.Table{5, 5}, Robot: &state.Robot{2, 4, state.North}}
+	state := &state.State{Table: state.Table{5, 5}, Robot: &state.Robot{2, 4, state.North}}
 	c := Move{}
 
 	c.Execute(state)

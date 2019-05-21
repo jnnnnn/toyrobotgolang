@@ -9,7 +9,7 @@ func (c Move) Parse(line string) bool {
 	return line == "MOVE"
 }
 
-func (c Move) Execute(model state.State) {
+func (c Move) Execute(model *state.State) {
 	r := model.Robot
 	if r == nil {
 		return

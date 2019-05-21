@@ -1,7 +1,5 @@
 package state
 
-import "errors"
-
 type State struct {
 	*Robot
 	Table
@@ -20,15 +18,7 @@ func (t Table) ValidPosition(x, y int) bool {
 	return true
 }
 
-// Place a robot on a table.
-func Place(x, y int, f Facing, t Table) *Robot {
-	if t.ValidPosition(x, y) {
-		return &Robot{PositionX: x, PositionY: y, Current: f}
-	}
-	return nil
-}
-
-// Facing is a Facing point
+// Facing is a compass point
 type Facing int
 
 // These are the allowed Facings in clockwise order
@@ -53,21 +43,6 @@ func (f Facing) ToString() string {
 		return "WEST"
 	}
 	return ""
-}
-
-// ParseFacing is a function
-func ParseFacing(s string) (Facing, error) {
-	switch s {
-	case "NORTH":
-		return North, nil
-	case "EAST":
-		return East, nil
-	case "SOUTH":
-		return South, nil
-	case "WEST":
-		return West, nil
-	}
-	return -1, errors.New("Unparseable facing direction")
 }
 
 // Turning left or right
