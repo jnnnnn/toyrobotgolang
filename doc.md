@@ -66,3 +66,6 @@ digraph {
 
 How to decide which command to call? Pull out first word of command and select? Give line to each command until one can parse it? Yeah, that's better (but possibly less performant).
 
+Update go to 1.12.5 using `snap install go --classic`.
+
+Try again with packages.

@@ -1,15 +1,17 @@
-package main
+package command
 
 import (
 	"testing"
+
+	"github.com/jnnnnn/toyrobotgolang/state"
 )
 
-func testState() State {
-	return State{Table: Table{5, 5}, Robot: &Robot{2, 2, North}}
+func testState() state.State {
+	return state.State{Table: state.Table{5, 5}, Robot: &state.Robot{2, 2, state.North}}
 }
 
-func testInitialState() State {
-	return State{Table: Table{5, 5}, Robot: nil}
+func testInitialState() state.State {
+	return state.State{Table: state.Table{5, 5}, Robot: nil}
 }
 
 func TestMoveParseGood(t *testing.T) {
@@ -20,7 +22,7 @@ func TestMoveParseGood(t *testing.T) {
 }
 func TestMoveParseBad(t *testing.T) {
 	c := Move{}
-	if c.Parse("MOVER") != true {
+	if c.Parse("MOVER") == true {
 		t.Errorf("Shouldn't have parsed MOVER.")
 	}
 }
@@ -48,7 +50,7 @@ func TestMoveValid(t *testing.T) {
 	}
 }
 func TestMoveInvalid(t *testing.T) {
-	state := State{Table: Table{5, 5}, Robot: &Robot{2, 4, North}}
+	state := state.State{Table: state.Table{5, 5}, Robot: &state.Robot{2, 4, state.North}}
 	c := Move{}
 
 	c.Execute(state)
