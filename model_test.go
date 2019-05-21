@@ -4,7 +4,7 @@ import "testing"
 
 func TestMoveValid(t *testing.T) {
 	table := Table{SizeX: 5, SizeY: 5}
-	robot := Robot{PositionX: 2, PositionY: 2, Current: North}
+	robot := &Robot{PositionX: 2, PositionY: 2, Current: North}
 	Move(robot, table)
 	if robot.PositionY != 3 && robot.PositionX != 2 {
 		t.Errorf("Move to 3,2 didn't work; got %d %d", robot.PositionX, robot.PositionY)
@@ -13,7 +13,7 @@ func TestMoveValid(t *testing.T) {
 
 func TestMoveInvalid(t *testing.T) {
 	table := Table{SizeX: 5, SizeY: 5}
-	robot := Robot{PositionX: 4, PositionY: 2, Current: East}
+	robot := &Robot{PositionX: 4, PositionY: 2, Current: East}
 	Move(robot, table)
 	if robot.PositionY != 2 && robot.PositionX != 4 {
 		t.Errorf("Robot moved off table to %d %d", robot.PositionX, robot.PositionY)
@@ -33,5 +33,36 @@ func TestInvalidPlace(t *testing.T) {
 	robot := Place(10, 0, North, table)
 	if robot != nil {
 		t.Errorf("Robot placed in an invalid position")
+	}
+}
+
+func TestTableValid(t *testing.T) {
+	table := Table{SizeX: 5, SizeY: 5}
+	got := table.ValidPosition(0, 4)
+	if got != true {
+		t.Errorf("Position 2,2 should be valid")
+	}
+}
+
+func TestTablePositionLarge(t *testing.T) {
+	table := Table{SizeX: 5, SizeY: 5}
+	if table.ValidPosition(-1, 3) != false {
+		t.Errorf("Position -1, 3 is outside bounds")
+	}
+}
+
+func TestTurnLeft(t *testing.T) {
+	robot := Robot{Current: North}
+	robot.Turn(Left)
+	if robot.Current != West {
+		t.Errorf("Left of North is West, got %d", robot.Current)
+	}
+}
+
+func TestTurnRight(t *testing.T) {
+	robot := Robot{Current: West}
+	robot.Turn(Right)
+	if robot.Current != North {
+		t.Errorf("Right of West is North")
 	}
 }

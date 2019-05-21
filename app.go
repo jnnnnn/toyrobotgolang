@@ -53,6 +53,6 @@ func Handle(line string, robot **Robot, table Table) {
 	case "MOVE":
 		Move(r, table)
 	case "REPORT":
-		fmt.Printf("r is at %d %d %s\n", r.PositionX, r.PositionY, UnParseFacing(r.Current))
+		fmt.Printf("r is at %d %d %s\n", r.PositionX, r.PositionY, r.Current.ToString())
 	}
 }
