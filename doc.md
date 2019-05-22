@@ -89,3 +89,26 @@ digraph {
 250 lines of code, 250 lines of tests.
 
 Diagram looks pretty overcomplicated :( I can't see a way of simplifying the diagram (by changing the code architecture).
+
+Maybe if I take out the Parse and Execute?
+
+```graphviz
+digraph {
+    app -> { model commands }
+    model -> { model_robot model_table }
+    model_robot -> { model_facing }
+    ValidPosition -> { model_table }
+    commands -> { command_move command_place command_report command_turn }
+    {command_move command_place } -> { ValidPosition model_robot model_table model_facing }
+    command_report -> { model_robot }
+    command_turn -> { model_robot model_facing }
+    
+}
+```
+
+That looks clearer... I can't see a better way. Needs a few integration tests, maybe:
+
+- PLACE invalid, REPORT
+- PLACE, REPORT, TURN, MOVE, REPORT
+- several invalid commands then PLACE then some more invalid commands then REPORT
+
