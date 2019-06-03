@@ -6,31 +6,31 @@ type Turn struct {
 	model.Turning
 }
 
-func (c *Turn) Parse(line string) bool {
+func (turn *Turn) Parse(line string) bool {
 	switch line {
 	case "LEFT":
-		c.Turning = model.Turning_Left
+		turn.Turning = model.Turning_Left
 		return true
 	case "RIGHT":
-		c.Turning = model.Turning_Right
+		turn.Turning = model.Turning_Right
 		return true
 	default:
 		return false
 	}
 }
 
-func (c Turn) Execute(state *model.Model) {
-	r := state.Robot
-	if r == nil {
+func (turn Turn) Execute(state *model.Model) {
+	robot := state.Robot
+	if robot == nil {
 		return
 	}
-	if c.Turning == model.Turning_Left {
-		r.Current--
+	if turn.Turning == model.Turning_Left {
+		robot.Current--
 	} else {
-		r.Current++
+		robot.Current++
 	}
-	r.Current %= model.Facing_Count
-	if r.Current < 0 {
-		r.Current += model.Facing_Count
+	robot.Current %= model.Facing_Count
+	if robot.Current < 0 {
+		robot.Current += model.Facing_Count
 	}
 }
