@@ -9,10 +9,10 @@ type Turn struct {
 func (c *Turn) Parse(line string) bool {
 	switch line {
 	case "LEFT":
-		c.Turning = model.Left
+		c.Turning = model.Turning_Left
 		return true
 	case "RIGHT":
-		c.Turning = model.Right
+		c.Turning = model.Turning_Right
 		return true
 	default:
 		return false
@@ -24,13 +24,13 @@ func (c Turn) Execute(state *model.Model) {
 	if r == nil {
 		return
 	}
-	if c.Turning == model.Left {
+	if c.Turning == model.Turning_Left {
 		r.Current--
 	} else {
 		r.Current++
 	}
-	r.Current %= model.FacingCount
+	r.Current %= model.Facing_Count
 	if r.Current < 0 {
-		r.Current += model.FacingCount
+		r.Current += model.Facing_Count
 	}
 }

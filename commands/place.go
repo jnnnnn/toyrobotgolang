@@ -48,13 +48,13 @@ func (c Place) Execute(state *model.Model) {
 func ParseFacing(s string) (model.Facing, error) {
 	switch s {
 	case "NORTH":
-		return model.North, nil
+		return model.Facing_North, nil
 	case "EAST":
-		return model.East, nil
+		return model.Facing_East, nil
 	case "SOUTH":
-		return model.South, nil
+		return model.Facing_South, nil
 	case "WEST":
-		return model.West, nil
+		return model.Facing_West, nil
 	}
 	return -1, errors.New("Unparseable facing direction")
 }

@@ -21,7 +21,7 @@ func TestTurnParseBad(t *testing.T) {
 
 func TestTurnInitialize(t *testing.T) {
 	state := testInitialModel()
-	c := Turn{model.Left}
+	c := Turn{model.Turning_Left}
 
 	c.Execute(state)
 
@@ -32,11 +32,11 @@ func TestTurnInitialize(t *testing.T) {
 
 func TestTurnValid(t *testing.T) {
 	state := testModel()
-	c := Turn{model.Left}
+	c := Turn{model.Turning_Left}
 
 	c.Execute(state)
 
-	if state.Robot.Current != model.West {
+	if state.Robot.Current != model.Facing_West {
 		t.Errorf("Turn left from north is west")
 	}
 }

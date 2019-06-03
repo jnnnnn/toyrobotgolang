@@ -21,7 +21,7 @@ func TestPlaceParseBad(t *testing.T) {
 
 func TestPlaceValid(t *testing.T) {
 	state := testInitialModel()
-	c := Place{2, 3, model.West}
+	c := Place{2, 3, model.Facing_West}
 
 	c.Execute(state)
 
@@ -29,14 +29,14 @@ func TestPlaceValid(t *testing.T) {
 		t.Errorf("Robot was not placed")
 	}
 	r := state.Robot
-	if r.PositionX != 2 || r.PositionY != 3 || r.Current != model.West {
+	if r.PositionX != 2 || r.PositionY != 3 || r.Current != model.Facing_West {
 		t.Errorf("Robot was placed incorrectly.")
 	}
 }
 
 func TestPlaceInvalid(t *testing.T) {
-	state := &model.Model{Table: model.Table{5, 5}, Robot: &model.Robot{2, 4, model.North}}
-	c := Place{2, 6, model.West}
+	state := &model.Model{Table: model.Table{5, 5}, Robot: &model.Robot{2, 4, model.Facing_North}}
+	c := Place{2, 6, model.Facing_West}
 
 	c.Execute(state)
 

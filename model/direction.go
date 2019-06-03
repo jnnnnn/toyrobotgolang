@@ -5,23 +5,23 @@ type Facing int
 
 // These are the allowed Facings in clockwise order
 const (
-	North Facing = iota
-	East
-	South
-	West
-	FacingCount
+	Facing_North Facing = iota
+	Facing_East
+	Facing_South
+	Facing_West
+	Facing_Count
 )
 
 // ToString turns Facing into a string
 func (f Facing) ToString() string {
 	switch f {
-	case North:
+	case Facing_North:
 		return "NORTH"
-	case East:
+	case Facing_East:
 		return "EAST"
-	case South:
+	case Facing_South:
 		return "SOUTH"
-	case West:
+	case Facing_West:
 		return "WEST"
 	}
 	return ""
@@ -32,6 +32,6 @@ type Turning int
 
 // The two ways that the robot can turn
 const (
-	Left Turning = iota
-	Right
+	Turning_Left Turning = iota
+	Turning_Right
 )

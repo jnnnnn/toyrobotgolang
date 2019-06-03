@@ -17,13 +17,13 @@ func (c Move) Execute(state *model.Model) {
 	x := r.PositionX
 	y := r.PositionY
 	switch r.Current {
-	case model.North:
+	case model.Facing_North:
 		y++
-	case model.South:
+	case model.Facing_South:
 		y--
-	case model.East:
+	case model.Facing_East:
 		x++
-	case model.West:
+	case model.Facing_West:
 		x--
 	}
 	if state.Table.ValidPosition(x, y) {

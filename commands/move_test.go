@@ -7,7 +7,7 @@ import (
 )
 
 func testModel() *model.Model {
-	return &model.Model{Table: model.Table{5, 5}, Robot: &model.Robot{2, 2, model.North}}
+	return &model.Model{Table: model.Table{5, 5}, Robot: &model.Robot{2, 2, model.Facing_North}}
 }
 
 func testInitialModel() *model.Model {
@@ -50,7 +50,7 @@ func TestMoveValid(t *testing.T) {
 	}
 }
 func TestMoveInvalid(t *testing.T) {
-	state := &model.Model{Table: model.Table{5, 5}, Robot: &model.Robot{2, 4, model.North}}
+	state := &model.Model{Table: model.Table{5, 5}, Robot: &model.Robot{2, 4, model.Facing_North}}
 	c := Move{}
 
 	c.Execute(state)
